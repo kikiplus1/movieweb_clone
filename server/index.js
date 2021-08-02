@@ -4,6 +4,7 @@ const port = 5000
 const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser')
 const {User} = require("./modele/User");
+const {auth}= require("./middleware/auth")
 const config = require('./confiv/key');
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -19,7 +20,9 @@ mongoose.connect(config.mongoURI,{
 }).then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err))
 
-
+app.get('/api/hello', (req,res)=>{
+    res.send("안녕하세요~")
+})
 
 // 서버
 app.get('/',(req,res) => res.send('안녕하세요!'))
@@ -73,8 +76,29 @@ app.post('/api/login',(req, res) => {
     })
 })
 
-
+//인증
 app.get('/api/users/auth',auth,(req,res) =>{
+    //여기까지 미들웨어를 통과해 왔다는 얘기는 인증이 됨을 의미
+    res.status(200).json({
+        _id: req.user._id,
+        isAdmiin : req.user.role == 0? flase: true,
+        isAuth : true,
+        email : req.user.email,
+        name : req.user.name,
+        lastname : req.user.lastname,
+        role : req.user.role,
+        image : req.user.image
+    })
 
-    
+})
+
+//로그아웃
+app.get('/api/users/logout', auth,(req,res) =>{
+    User.findOneAndUpdate({_id:req.user._id},{token:""}
+    , (err, user) =>{
+        if(err) return res.json({sucess:false, err});
+        return res.status(200).send({
+            sucess : true
+        })
+    })
 })
