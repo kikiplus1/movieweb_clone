@@ -6,19 +6,23 @@
     "start": "node index.js",
     "backend": "nodemon server/index.js",
     "test": "echo \"Error: on test specified\" && exit 1",
-    "dev" : "concurrently \"npm run backend\" \"npm run start --prefix client\""
+    "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\""
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "concurrently": "^6.2.0",
     "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
     "dcrypt": "^0.0.2",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.13.5"
+    "mongoose": "^5.13.5",
+    "mongoose-timestamp": "^0.6.0",
+    "path": "^0.12.7"
   },
   "devDependencies": {
+    "@ant-design/icons": "^4.6.2",
     "nodemon": "^2.0.12"
   }
 }

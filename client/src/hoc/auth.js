@@ -37,10 +37,10 @@ export default function(SpecificComponent, option, adminRoute = null){
             }
             })
             
-        }, [props._dishType])
+        }, [])
 
         return(
-            <SpecificComponent/>
+            <SpecificComponent {...props}/>
         )
         
     }

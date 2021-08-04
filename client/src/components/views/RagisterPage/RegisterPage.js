@@ -1,17 +1,46 @@
 
 import React, {useState} from 'react'
+import moment from "moment";
 import {useDispatch} from 'react-redux';
 import {registerUser} from '../../../_action/user_action.'
 import {withRouter} from 'react-router-dom'
+import {Form,Input,Button} from 'antd';
+
+const formItemLayout = {
+    labelCol: {
+      xs: { span: 24 },
+      sm: { span: 8 },
+    },
+    wrapperCol: {
+      xs: { span: 24 },
+      sm: { span: 16 },
+    },
+  };
+  const tailFormItemLayout = {
+    wrapperCol: {
+      xs: {
+        span: 24,
+        offset: 0,
+      },
+      sm: {
+        span: 16,
+        offset: 8,
+      },
+    },
+  };
+  
+  
 
 function RegisterPage( props) {
+
+    const dispatch = useDispatch();
 
     const [Email, setEmail ] = useState("")
     const [Password, setPassword ] = useState("")
     const [Name, setName ] = useState("")
     const [ConfirmPassword, setConfirmPassword ] = useState("")
 
-    const dispatch = useDispatch();
+    
 
     const onEmailHandler = (event) => {
         setEmail(event.currentTarget.value)
@@ -39,6 +68,7 @@ function RegisterPage( props) {
         let body = {
             email : Email,
             password : Password,
+            image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`,
             name: Name
         }
         
@@ -53,38 +83,67 @@ function RegisterPage( props) {
 
     }
 
-
-
-
     return (
         <div style={{
             display:'flex', justifyContent:"center", alignItems:'center',
             width:'100%', height:'100vh'
         }}>
+            <div className="app">
+            <h2>Sign up</h2>
+            <Form style={{ minWidth: '375px' }} {...formItemLayout}  ></Form>
             
             <form style={{display : 'flex', flexDirection: "column"}}
             onSubmit={onSubmitHandler}>
-                <label>Email</label>
-                <input type="email" value={Email} onChange={onEmailHandler}/>
 
-                <label>Name</label>
-                <input type="text" value={Name} onChange={onNameHandler}/>
-    
+                <Form.Item required label="Email">
+                <Input
+                  id="email"
+                  placeholder="Enter your Email"
+                  type="email"
+                  value={Email}
+                  onChange={onEmailHandler}
+                />
+                </Form.Item>
+              
+                <Form.Item required label="Name">
+                <Input
+                  id="name"
+                  placeholder="Enter your name"
+                  type="text"
+                  value={Name}
+                  onChange={onNameHandler}
+                />
+                </Form.Item>
 
-                <label>Password</label>
-                <input type="password" value={Password} onChange={onPasswordHandler}/>
-           
-
-                <label>Confirm Password</label>
-                <input type="password" value={ConfirmPassword} onChange={onConfirmPasswordHandler}/>
-                <br/>
+                <Form.Item required label="Password" >
+                <Input
+                  id="password"
+                  placeholder="Enter your password"
+                  type="password"
+                  value={Password}
+                  onChange={onPasswordHandler}
+                 />
+               </Form.Item>
+               
+               <Form.Item required label="ConfirmPassword" >
+                <Input
+                  id="confirmPassword"
+                  placeholder="Enter your confirmPassword"
+                  type="password"
+                  value={ConfirmPassword}
+                  onChange={onConfirmPasswordHandler}
+                  />
+                </Form.Item>
 
                 
-                <button type="submit">
-                회원가입
-                </button>
+                <Form.Item {...tailFormItemLayout}>
+                <Button type="primary" onClick={onSubmitHandler}>
+                  Submit
+                </Button>
+              </Form.Item>
 
             </form>
+        </div>
         </div>
     )
     
