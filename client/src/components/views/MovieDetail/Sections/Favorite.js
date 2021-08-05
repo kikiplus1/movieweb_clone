@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react'
-import {Button } from 'antd';
+import {Button} from 'antd';
 import axios from 'axios';
 
 
@@ -8,7 +8,7 @@ function Favorite(props) {
     const [FavoriteNumber,setFavoriteNumber] = useState(0)
     const [Favorited, setFavorited] = useState(false)
 
-    const movieId = props.movieId
+    const movieId = props.MovieId
     const userFrom = props.userFrom
     const movieTitle = props.movieInfo.title
     const moviePost = props.movieInfo.backdrop_path
@@ -22,14 +22,13 @@ function Favorite(props) {
         movieRunTime : movieRunTime
     }
     
-    useEffect(() => { 
-        
-      
-
+    useEffect(() => {
         axios.post('/api/favorite/favoriteNumber',variables)
             .then(response=>{
                 if(response.data.success){
                     setFavoriteNumber(response.data.favoriteNumber)
+           
+                    
 
                 }else{
                     alert('숫자 정보를 가져오는데 실패 했습니다.')
@@ -46,6 +45,8 @@ function Favorite(props) {
                 }
             })
     },[])
+
+
     const onClickFavorite = () => {
         if (Favorited) {
             axios.post('/api/favorite/removeFromFavorite', variables)

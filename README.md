@@ -14,6 +14,10 @@ redux를 상태관리
 영화 api를 이용한 영화 검색기능, 댓글, 리뷰 기능 등의 기본적인 영화 리뷰 사이트
 
 
+###문제점
+로그인할때의 입력과 한계값등의 제한을주기 위한 라이브러리 formik와 yup가 설치되지 않은 관계로
+로그인할때 필수조건을들 나타낼 수 없었다..
+
 
 ### 개발 도구
 
@@ -43,30 +47,32 @@ redux를 상태관리
 
 ```
 //server
-  {
-  "name": "nodefstudy",
   "version": "1.3.7",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "backend": "nodemon server/index.js",
-    "test": "echo \"Error: on test specified\" && exit 1",
-    "dev" : "concurrently \"npm run backend\" \"npm run start --prefix client\""
-  },
-  "dependencies": {
-    "bcrypt": "^5.0.1",
-    "body-parser": "^1.19.0",
-    "concurrently": "^6.2.0",
-    "cookie-parser": "^1.4.5",
-    "dcrypt": "^0.0.2",
-    "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.13.5"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.12"
-  }
-}
+  "lockfileVersion": 2,
+  "requires": true,
+  "packages": {
+    "": {
+      "name": "nodefstudy",
+      "version": "1.3.7",
+      "dependencies": {
+        "bcrypt": "^5.0.1",
+        "body-parser": "^1.19.0",
+        "concurrently": "^6.2.0",
+        "cookie-parser": "^1.4.5",
+        "cors": "^2.8.5",
+        "dcrypt": "^0.0.2",
+        "express": "^4.17.1",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^5.13.5",
+        "mongoose-timestamp": "^0.6.0",
+        "path": "^0.12.7"
+      },
+      "devDependencies": {
+        "@ant-design/icons": "^4.6.2",
+        "nodemon": "^2.0.12"
+
+        //이하생략
+      }
 
 //client
 {
@@ -79,7 +85,6 @@ redux를 상태관리
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
     "http-proxy-middleware": "^2.0.0",
-    "proxy": "http://localhost:5000",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",

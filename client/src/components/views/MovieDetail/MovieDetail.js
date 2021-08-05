@@ -1,6 +1,6 @@
 
 import React,{useEffect,useState} from 'react'
-import { List, Avatar, Row, Col, Button } from 'antd';
+import { Row, Button } from 'antd';
 import {API_URL , API_KEY, IMAGE_BASE_URL} from '../../../Config'
 import MainImage from '../LandingPage/Sections/MainImage';
 import MovieInfo from './Sections/MovieInfo';
@@ -16,6 +16,7 @@ function MovieDetail(props) {
 
     //Dom이 시작할때 
     useEffect(()=>{
+        
 
         let endPointCrew = `${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`
         let endPointInfo = `${API_URL}movie/${movieId}?api_key=${API_KEY}`

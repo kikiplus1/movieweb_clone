@@ -13,8 +13,9 @@ router.post("/favoriteNumber", (req, res) => {
             //그다음 프론트에 다시 숫자 정보 보내주기
             success: true, favoriteNumber:info.length
          })
-    });
-});
+    })
+})
+
 router.post("/favorited", (req, res) => {
 
     //내가 이 영화를 favorite리스트에 넣었는지 db에서 정보를 확인
@@ -50,6 +51,26 @@ router.post('/addToFavorite', (req, res) => {
     favorite.save((err, doc) => {
         if (err) return res.status(400).send(err)
         return res.status(200).json({ success: true })
+    })
+
+})
+
+router.post('/getFavoriteMovie', (req, res) => {
+
+    Favorite.find({'userFrom':req.body.userForm})
+    .exec((err, favorites) => {
+        if (err) return res.status(400).send(err)
+        return res.status(200).json({ success: true, favorites })
+    })
+
+})
+
+router.post('/removeFromFavoriteMovie', (req, res) => {
+
+    Favorite.findOneAndDelete({ movieId: req.body.movieId, userFrom: req.body.userFrom })
+    .exec((err, result) => {
+        if (err) return res.status(400).send(err)
+        res.status(200).json({ success: true })
     })
 
 })
